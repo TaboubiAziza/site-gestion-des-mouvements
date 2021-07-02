@@ -1,0 +1,33 @@
+<?php
+include_once 'conn.php';
+$matricule = $_POST['matricule'];
+$cin = $_POST['cin'];
+$email = $_POST['email'];
+$password = $_POST['password'];
+$name = $_POST['name'];
+$lastname = $_POST['lastname'];
+$role = $_POST['role'];
+$cnsscnpsnum = $_POST['cnsscnpsnum'];
+$gender = $_POST['gender'];
+$birthdate = $_POST['birthdate'];
+$entrydate = $_POST['entrydate'];
+$position = $_POST['position'];
+$employment = $_POST['employment'];
+$corps = $_POST['corps'];
+$status = $_POST['status'];
+$direction = $_POST['direction'];
+$entity = $_POST['entity'];
+$place = $_POST['place'];
+$service = $_POST['service'];
+$affiliate = $_POST['affiliate'];
+$leavebalance = $_POST['leavebalance'];
+$authorizationbalance = $_POST['authorizationbalance'];
+
+$update = "UPDATE " . USERS_TBL . " SET cin=?, email=?, password=?, name=?, lastname=?, role=?, cnsscnpsnum=?, gender=?, birthdate=?, entrydate=?, position=?, employment=?, corps=?, status=?, direction=?, entity=?, place=?, service=?, affiliate=?, leavebalance=?, authorizationbalance=? WHERE matricule=?";
+$stmt = $conn->prepare($update);
+$stmt->bind_param("sssssisssssssssssssiis", $cin, $email, $password, $name, $lastname, $role, $cnsscnpsnum, $gender, $birthdate, $entrydate, $position, $employment, $corps, $status, $direction, $entity, $place, $service, $affiliate, $leavebalance, $authorizationbalance, $matricule);
+$stmt->execute();
+echo "User updated.";
+header("Location:manageemployees.php");
+$stmt->close();
+$conn->close();
